@@ -14,22 +14,57 @@
 <script src="../jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
 <script type="text/javascript">
+    var trans_id;
+
+    $(document).ready(init_trans_id());
+
+    function init_trans_id(){
+      trans_id = "";
+    }
+
+    function generate_transaction_id(){
+      trans_id = "";
+      var the_date = new Date();
+      trans_id = the_date.getTime();
+      trans_id += makeid();
+    }
+
+    function makeid(){
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+      for( var i=0; i < 2; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      return text;
+    }
+
     $(function(){
         $("#scanbtn").click(function(){
-    //            cordova.plugins.barcodeScanner.scan(
-    //  function (result) {
 
-        // getProduct(result.text);
-        getProduct("83012016");
-          // alert("We got a barcode\n" +
-          //       "Result: " + result.text + "\n" +
-          //       "Format: " + result.format + "\n" +
-          //       "Cancelled: " + result.cancelled);
-//      },
-//      function (error) {
-//          alert("Scanning failed: " + error);
-  //    }
-//   );
+          if(trans_id==""){
+            generate_transaction_id();
+          }
+
+            cordova.plugins.barcodeScanner.scan(
+                function (result) {
+                    getProduct(result.text);
+                },
+                function (error) {
+                    alert("Scanning failed: " + error);
+                }
+            );
+        });
+
+
+        $("#submitbtn").click(function(){
+          //create transaction record: $transaction_id, $date, $time, $customer
+          var the_date = new Date();
+          var date_val = the_date.getFullYear() + "-" + (the_date.getMonth()+1) + "-" + the_date.getDate();
+          var time_val = the_date.getHours() + ":" + the_date.getMinutes() + ":" + the_date.getSeconds();
+          var customer_val = $("#customer_phone").val();
+
+          add_transaction(trans_id,date_val,time_val,customer_val, total_val);
+
+          trans_id=="";
         });
     });
 
@@ -40,32 +75,24 @@
         var obj=$.ajax({url:u,async:false});
         //Convert the JSON string to object
         var result=$.parseJSON(obj.responseText);
-
         return result;	//return object
     }
 
     function getProduct(code){
       var theUrl="../action.php?cmd=1&productid="+code;
-
       var obj=sendRequest(theUrl);		//send request to the above url
       if(obj.result==1){					//check result
         var product_name = obj.product[0]['product_name'];
         var product_price = obj.product[0]['product_price'];
-//alert(product_name);
-        // id="prod_id_display"
         $("#prod_name_display").html(product_name);
         $("#prod_id_display").html("Barcode: "+code);
         $("#prod_price_display").html("Price: GHc"+product_price);
 
-
-$("#simulateClick").trigger("click");
-// alert($("#prod_id_display").html());
-
+        $("#simulateClick").trigger("click");
       }else{
           //show error message
           alert("error adding");//err
       }
-
     }
 
 
@@ -127,6 +154,8 @@ listString += obj.people[i].firstname;
 class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left ui-btn-a"
 >Scan Product</a>
 
+<input type="tel" name="customer_phone" id="customer_phone" value="" placeholder="Phone Number" data-theme="a">
+
 <div data-role="popup" id="popupSetQty" data-theme="a" class="ui-corner-all">
   <form>
     <div style="padding:10px 20px;">
@@ -165,7 +194,7 @@ class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left ui-btn-a"
 <h2 style="float:right;">Total: GHc 50.00</h2>
 </div>
 <br><br><br><br>
-<a href="" data-rel="popup" data-position-to="window" id="scanbtn2"
+<a href="" data-rel="popup" data-position-to="window" id="submitbtn"
 class="ui-btn ui-corner-all ui-shadow ui-icon-shop ui-btn-icon-left ui-btn-a"
 data-transition="pop">Submit</a>
 
