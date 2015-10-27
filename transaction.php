@@ -57,10 +57,7 @@ class transaction extends adb{
        */
         function set_transaction_value($id, $value){
             $str_query="update pos_transaction set value = $value where transaction_id='$id'";
-            if(!$this->query($str_query)){
-                return false;
-            }
-            return $this->fetch();
+            return $this->query($str_query)
         }
 
 
