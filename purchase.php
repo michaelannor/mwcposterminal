@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * author:
+ * date:
+ * description:
+ */
+
 include("adb.php");
 
 class purchase extends adb{
