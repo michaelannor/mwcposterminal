@@ -4,12 +4,13 @@ include("adb.php");
 class transaction extends adb{
   /**
    * [[The add_transaction is a function to record a transaction in the database]]
+   * @param [[Int]] $transaction_id  [[The id of the current transactions. Ties common purchases together]]
    * @param [[Date]] $date [[The date of the transaction]]
    * @param [[Time]] $time  [[The time of the transaction]]
    * @param [[Varchar]] $customer  [[The customer's phone number]]
    */
-    function add_transaction($date, $time, $customer){
-        $str_query="insert into pos_transaction set date='$date',
+    function add_transaction($transaction_id, $date, $time, $customer){
+        $str_query="insert into pos_transaction set transaction_id='$transaction_id',date='$date',
         time='$time',customer='$customer'";
         return $this->query($str_query);
     }
