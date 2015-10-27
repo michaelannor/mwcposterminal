@@ -15,20 +15,94 @@
 
 <script type="text/javascript">
     $(function(){
-        $("#scanbtn").click( function(){
-                cordova.plugins.barcodeScanner.scan(
-      function (result) {
-          alert("We got a barcode\n" +
-                "Result: " + result.text + "\n" +
-                "Format: " + result.format + "\n" +
-                "Cancelled: " + result.cancelled);
-      },
-      function (error) {
-          alert("Scanning failed: " + error);
-      }
-   );
+        $("#scanbtn").click(function(){
+    //            cordova.plugins.barcodeScanner.scan(
+    //  function (result) {
+
+        // getProduct(result.text);
+        getProduct("83012016");
+          // alert("We got a barcode\n" +
+          //       "Result: " + result.text + "\n" +
+          //       "Format: " + result.format + "\n" +
+          //       "Cancelled: " + result.cancelled);
+//      },
+//      function (error) {
+//          alert("Scanning failed: " + error);
+  //    }
+//   );
         });
     });
+
+    function sendRequest(u){
+        // Send request to server
+        //u a url as a string
+        //async is type of request
+        var obj=$.ajax({url:u,async:false});
+        //Convert the JSON string to object
+        var result=$.parseJSON(obj.responseText);
+
+        return result;	//return object
+    }
+
+    function getProduct(code){
+      var theUrl="../action.php?cmd=1&productid="+code;
+
+      var obj=sendRequest(theUrl);		//send request to the above url
+      if(obj.result==1){					//check result
+        var product_name = obj.product[0]['product_name'];
+        var product_price = obj.product[0]['product_price'];
+//alert(product_name);
+        // id="prod_id_display"
+        $("#prod_name_display").html(product_name);
+        $("#prod_id_display").html("Barcode: "+code);
+        $("#prod_price_display").html("Price: GHc"+product_price);
+
+
+$("#simulateClick").trigger("click");
+// alert($("#prod_id_display").html());
+
+      }else{
+          //show error message
+          alert("error adding");//err
+      }
+
+    }
+
+
+/*
+    function add(){
+        var fn = $("#fname").val();
+        var ln = $("#lname").val();
+        var theUrl="hello.php?cmd=1&firstname="+fn+"&lastname="+ln;
+        var obj=sendRequest(theUrl);		//send request to the above url
+        if(obj.result==1){					//check result
+        }else{
+            //show error message
+            alert("error adding");//err
+        }
+    }
+function getPeople(){
+             var theUrl="hello.php?cmd=2";
+var obj=sendRequest(theUrl);		//send request to the above url
+        if(obj.result==1){					//check result
+var msb;
+            var listString = "";
+            for (var i = 0; i < obj.people.length; i++){
+             listString += "<li>";
+listString += obj.people[i].firstname;
+                listString += ": ";
+                listString += obj.people[i].lastname
+                listString += "</li>";
+            }
+                 $("#reading-list").html(listString);
+        }else{
+            //show error message
+            alert("error adding");//err
+        }
+}
+*/
+
+
 
 </script>
 
@@ -45,19 +119,20 @@
 
 <div role="main" class="ui-content">
 
-<!-- <a href="#popupLogin" data-role=button data-inline=false id="scanbtn">Scan Product</a> -->
+<!-- <a href="#popupSetQty" data-role=button data-inline=false id="scanbtn">Scan Product</a> -->
 
+<a href="#popupSetQty" data-rel="popup" data-position-to="window"  id="simulateClick" data-transition="pop">
 
-<a href="#popupLogin" data-rel="popup" data-position-to="window" id="scanbtn"
+<a href="" id="scanbtn"
 class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left ui-btn-a"
-data-transition="pop">Scan Product</a>
+>Scan Product</a>
 
-<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+<div data-role="popup" id="popupSetQty" data-theme="a" class="ui-corner-all">
   <form>
     <div style="padding:10px 20px;">
-      <h3>Product Name</h3>
-      <h4>Code: Barcode</h4>
-      <h4>Price: GHc 0.00</h4>
+      <h3 id="prod_name_display">Product Name</h3>
+      <h4 id="prod_id_display">Code: Barcode</h4>
+      <h4 id="prod_price_display">Price: GHc 0.00</h4>
       <h4>Please input the quantity</h4>
       <label for="quantity" class="ui-hidden-accessible">Password:</label>
       <input type="number" name="pass" id="quantity" value="" placeholder="quantity" data-theme="a">
@@ -86,8 +161,13 @@ data-transition="pop">Scan Product</a>
   </li>
 </ul>
 
+<div>
 <h2 style="float:right;">Total: GHc 50.00</h2>
-
+</div>
+<br><br><br><br>
+<a href="" data-rel="popup" data-position-to="window" id="scanbtn2"
+class="ui-btn ui-corner-all ui-shadow ui-icon-shop ui-btn-icon-left ui-btn-a"
+data-transition="pop">Submit</a>
 
 </div>
 
