@@ -14,16 +14,22 @@
 <script src="../jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
 <script type="text/javascript">
-    var trans_id;
-    var trans_val;
+    var trans_id = "";
+    var trans_val = 0;
     var threshold = 500;
 
-    $(document).ready(init_transaction());
+    $(document).ready(null_trans());
+
+    function null_trans(){
+      trans_id = "";
+      trans_val = 0;
+    }
 
     function init_transaction(){
-      trans_id = "";
+      trans_id = generate_transaction_id();
+      alert("for test again"+trans_id);
       //note to self: reset to 0;
-      trans_val = 540;
+      trans_val = 0;
     }
 
     function generate_transaction_id(){
@@ -31,6 +37,7 @@
       var the_date = new Date();
       trans_id = the_date.getTime();
       trans_id += makeid();
+      return trans_id;
     }
 
     function makeid(){
@@ -44,7 +51,7 @@
     $(function(){
         $("#scanbtn").click(function(){
           if(trans_id==""){
-            generate_transaction_id();
+            init_transaction();
           }
             // cordova.plugins.barcodeScanner.scan(
                 // function (result) {
@@ -59,18 +66,34 @@
 
         $("#submitbtn").click(function(){
           //create transaction record: $transaction_id, $date, $time, $customer
+          if (trans_id!=""){
           add_transaction();
           if (trans_val>=threshold){
             send_discount_code();
           }
-          init_transaction();
+            null_trans();
+        }
+        else {
+          alert("Scan Product First");
+        }
+
         });
     });
 
     function send_discount_code() {
       var customer_val = $("#customer_phone").val();
-      alert(customer_val);
+      // alert(customer_val);
       var theUrl="../ajax-action.php?cmd=3&customer="+customer_val;
+
+      var obj=sendRequest(theUrl);		//send request to the above url
+      if(obj.result==1){					//check result
+
+      }else{
+          //show error message
+          alert("error adding discount code");//err
+      }
+
+
     }
 
     function add_transaction() {
@@ -88,7 +111,7 @@
 
       }else{
           //show error message
-          alert("error adding");//err
+          alert("error adding transaction");//err
       }
 
     }
