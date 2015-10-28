@@ -13,10 +13,10 @@ Point of Sale Terminal for MWC fall 2015 Mid-Semester Project
 <icon src="pos_icon.png" />
 <!-- <gap:splash src="splash.png" /> -->
 
-<gap:plugin name="com.phonegap.plugins.barcodescanner" version="2.2.0" />
+<gap:plugin name="com.phonegap.plugins.barcodescanner" version="2.0.0" />
 
 
-<gap:plugin name="cordova-plugin-whitelist" source="npm" /> 
+<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 <allow-navigation href="*" />
 <allow-intent href="*" />
 <access origin="*" />
