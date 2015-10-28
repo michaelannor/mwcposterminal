@@ -67,6 +67,7 @@
         $("#addtocartbtn").click(function(){
           //create purchase record: $product_id, $transaction_id, $qty, $price, $unit_price
             add_purchase();
+            $("#prod_quantity_display").val("");
         });
 
         $("#submitbtn").click(function(){
@@ -77,6 +78,10 @@
             send_discount_code();
           }
             null_trans();
+            //empty phone number, ul, and total
+            $("#customer_phone").val("");
+            $("#total_val_view").html("Total: GHc "+trans_val);
+            $("#purchase_list_ul").html("");
         }
         else {
           alert("Scan Product First");
@@ -129,8 +134,9 @@
       var product_price = $("#prod_price_display").html();
       var product_quantity = $("#prod_quantity_display").val();
       var sum = (product_quantity * product_price);
+      if (product_quantity > 0){
       trans_val += sum;
-      $("#total_val_view").html("GHc "+trans_val);
+      $("#total_val_view").html("Total: GHc "+trans_val);
       var theUrl="../ajax-action.php?cmd=4&transid="+trans_id+"&prodid="+product_id+"&qty="+product_quantity+"&unitprice="
       +product_price+"&sumprice="+sum;
       var obj=sendRequest(theUrl);		//send request to the above url
@@ -150,8 +156,9 @@
           purchase_list += "</p></li>";
 
           $("#purchase_list_ul").append(purchase_list);
-
-      }else{
+        }
+      }
+      else{
           //show error message
           alert("error adding purchase");//err
       }
