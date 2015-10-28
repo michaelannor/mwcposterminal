@@ -27,7 +27,6 @@
 
     function init_transaction(){
       trans_id = generate_transaction_id();
-      alert("for test again"+trans_id);
       //note to self: reset to 0;
       trans_val = 0;
     }
@@ -64,6 +63,12 @@
             // );
         });
 
+
+        $("#addtocartbtn").click(function(){
+          //create purchase record: $product_id, $transaction_id, $qty, $price, $unit_price
+            add_purchase();
+        });
+
         $("#submitbtn").click(function(){
           //create transaction record: $transaction_id, $date, $time, $customer
           if (trans_id!=""){
@@ -97,7 +102,7 @@
     }
 
     function add_transaction() {
-      var the_date = new Date();
+      var product_id = new Date();
       var date_val = the_date.getFullYear() + "-" + (the_date.getMonth()+1) + "-" + the_date.getDate();
       var time_val = the_date.getHours() + ":" + the_date.getMinutes() + ":" + the_date.getSeconds();
       var customer_val = $("#customer_phone").val();
@@ -116,11 +121,34 @@
 
     }
 
+
+    function add_purchase() {
+      //create purchase record: $product_id, $transaction_id, $qty, $price, $unit_price
+      var product_id = $("#prod_id_display").html();
+      var product_price = $("#prod_price_display").html();
+      var product_quantity = $("#prod_quantity_display").html();
+      var sum = (product_quantity * product_price);
+      total_val += sum;
+
+      var theUrl="../ajax-action.php?cmd=4&transid="+trans_id+"&prodid="+product_id+"&qty="+product_quantity+"&unitprice="
+      +product_price+"&sumprice="+sum;
+
+      var obj=sendRequest(theUrl);		//send request to the above url
+      if(obj.result==1){					//check result
+
+      }else{
+          //show error message
+          alert("error adding purchase");//err
+      }
+
+    }
+
+
     function sendRequest(u){
         // Send request to server
         //u a url as a string
         //async is type of request
-        alert(u);
+        // alert(u);
         var obj=$.ajax({url:u,async:false});
         //Convert the JSON string to object
         var result=$.parseJSON(obj.responseText);
@@ -140,7 +168,7 @@
         $("#simulateClick").trigger("click");
       }else{
           //show error message
-          alert("error adding");//err
+          alert("error: product not in database");//err
       }
     }
 </script>
@@ -174,7 +202,7 @@ class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left ui-btn-a"
       <h3 id="prod_name_display">Product Name</h3>
       <h4 id="prod_id_display">Code: Barcode</h4>
       <h4 id="prod_price_display">Price: GHc 0.00</h4>
-      <h4>Please input the quantity</h4>
+      <h5>Please input the quantity</h5>
       <label for="quantity" class="ui-hidden-accessible">Quantity:</label>
       <input type="number" name="quantity" id="quantity" value="" placeholder="quantity" data-theme="a">
       <a href="" id="addtocartbtn" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-shop" data-rel="back" role="button">Add to Cart</a>
