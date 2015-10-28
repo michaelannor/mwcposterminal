@@ -55,7 +55,7 @@ function case_send_discount_code(){
   $message = "Thank you for shopping with us. Use this code for a discount on your next visit:\n".$code;
 
 //note to self, uncomment when ready to deploy
-  //send_sms($customer,$message);
+  send_sms($customer,$message);
 
   if($obj-> add_customer($customer, $code)){
       echo '{"result":1,"message": "added successfully"}';

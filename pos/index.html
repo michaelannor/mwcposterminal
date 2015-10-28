@@ -52,15 +52,16 @@
           if(trans_id==""){
             init_transaction();
           }
-            // cordova.plugins.barcodeScanner.scan(
-                // function (result) {
-                    // getProduct(result.text);
-                    getProduct("83012016");
-                // },
-                // function (error) {
-                    // alert("Scanning failed: " + error);
-                // }
-            // );
+            cordova.plugins.barcodeScanner.scan(
+                function (result) {
+                    getProduct(result.text);
+                    // not to self, for web testing
+                    // getProduct("83012016");
+                },
+                function (error) {
+                    alert("Scanning failed: " + error);
+                }
+            );
         });
 
 
@@ -157,11 +158,16 @@
 
           $("#purchase_list_ul").append(purchase_list);
         }
-      }
       else{
           //show error message
           alert("error adding purchase");//err
       }
+    }
+    else{
+        //show error message, qty less than 1
+        // alert("error adding purchase");//err
+    }
+
 
     }
 
