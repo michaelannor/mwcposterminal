@@ -15,10 +15,11 @@ class transaction extends adb{
    * @param [[Date]] $date [[The date of the transaction]]
    * @param [[Time]] $time  [[The time of the transaction]]
    * @param [[Varchar]] $customer  [[The customer's phone number]]
+   * @param [[Varchar]] $value [[The total value of all purchases in a transaction]]
    */
-    function add_transaction($transaction_id, $date, $time, $customer){
+    function add_transaction($transaction_id, $date, $time, $customer, $value){
         $str_query="insert into pos_transaction set transaction_id='$transaction_id',date='$date',
-        time='$time',customer='$customer'";
+        time='$time',customer='$customer',value='$value'";
         return $this->query($str_query);
     }
 

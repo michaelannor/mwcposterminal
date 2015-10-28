@@ -15,11 +15,14 @@
 
 <script type="text/javascript">
     var trans_id;
+    var trans_val;
+    var threhold = 500;
 
-    $(document).ready(init_trans_id());
+    $(document).ready(init_transaction());
 
-    function init_trans_id(){
+    function init_transaction(){
       trans_id = "";
+      trans_val = 0;
     }
 
     function generate_transaction_id(){
@@ -57,16 +60,39 @@
 
         $("#submitbtn").click(function(){
           //create transaction record: $transaction_id, $date, $time, $customer
-          var the_date = new Date();
-          var date_val = the_date.getFullYear() + "-" + (the_date.getMonth()+1) + "-" + the_date.getDate();
-          var time_val = the_date.getHours() + ":" + the_date.getMinutes() + ":" + the_date.getSeconds();
-          var customer_val = $("#customer_phone").val();
+          add_transaction();
 
-          add_transaction(trans_id,date_val,time_val,customer_val, total_val);
+          if (trans_val>=threshold){
+            send_discount_code();
+          }
 
-          trans_id=="";
+          init_transaction();
         });
     });
+
+    function send_discount_code() {
+      var customer_val = $("#customer_phone").val();
+      var theUrl="../action.php?cmd=3&customer="+customer_val;
+    }
+
+    function add_transaction() {
+      var the_date = new Date();
+      var date_val = the_date.getFullYear() + "-" + (the_date.getMonth()+1) + "-" + the_date.getDate();
+      var time_val = the_date.getHours() + ":" + the_date.getMinutes() + ":" + the_date.getSeconds();
+      var customer_val = $("#customer_phone").val();
+      var total_val = trans_val;
+
+      var theUrl="../action.php?cmd=2&transid="+trans_id+"&date="+the_date+"&time="+time_val+"&customer="
+      +customer_val+"&value="+total_val;
+      var obj=sendRequest(theUrl);		//send request to the above url
+      if(obj.result==1){					//check result
+
+      }else{
+          //show error message
+          alert("error adding");//err
+      }
+
+    }
 
     function sendRequest(u){
         // Send request to server
@@ -191,7 +217,7 @@ class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left ui-btn-a"
 </ul>
 
 <div>
-<h2 style="float:right;">Total: GHc 50.00</h2>
+<h2 id="total_val" style="float:right;">Total: GHc 50.00</h2>
 </div>
 <br><br><br><br>
 <a href="" data-rel="popup" data-position-to="window" id="submitbtn"
