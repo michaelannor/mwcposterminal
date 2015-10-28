@@ -25,12 +25,15 @@ switch ($cmd) {
     break;
 }
 
-case_send_discount_code(){
+function case_send_discount_code(){
   include ("customer.php");
-  $customer = $_REQUEST['cuustomer'];
+  $customer = $_REQUEST['customer'];
   $obj = new customer();
 
-  $code = generate_discount_code();
+  $code = generate_discount_code(6);
+  $message = "Thank you for shoppig with us. Use this code for a discount on your next visit:\n".$code;
+
+  send_sms($customer,$message);
 
   if($obj-> add_customer($customer, $code)){
       echo '{"result":1,"message": "added successfully"}';
@@ -39,13 +42,40 @@ case_send_discount_code(){
   }
 }
 
-generate_discount_code(){
-
+//helper method to send sms through smsgh
+function send_sms($phone, $msg) {
+  // Here we assume the user is using the combination of his clientId and clientSecret as credentials
+    $auth = new BasicAuth("jokyhrvs", "volkzmqn");
+    // instance of ApiHost
+    $apiHost = new ApiHost($auth);
+    $enableConsoleLog = FALSE;
+    $messagingApi = new MessagingApi($apiHost, $enableConsoleLog);
+    try {
+        // Quick Send approach options. Choose the one that meets your requirement
+        $messageResponse = $messagingApi->sendQuickMessage("Shop", $phone, $msg);
+        if ($messageResponse instanceof MessageResponse) {
+//            echo $messageResponse->getStatus();
+            $messageResponse->getStatus();
+        } elseif ($messageResponse instanceof HttpResponse) {
+//            echo "\nServer Response Status : " . $messageResponse->getStatus();
+            $messageResponse->getStatus();
+        }
+    } catch (Exception $ex) {
+      //  echo $ex->getTraceAsString();
+        $ex->getTraceAsString();
+    }
 }
 
-case_add_transaction(){
+//helper, should generate random discount code
+  function generate_discount_code( $length = 6 ) {
+      $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      $code = substr( str_shuffle( $chars ), 0, $length );
+      return $code;
+  }
+
+function case_add_transaction(){
   include ("transaction.php");
-  $id = $_REQUEST['trans_id'];
+  $id = $_REQUEST['transid'];
   $date = $_REQUEST['date'];
   $time = $_REQUEST['time'];
   $customer = $_REQUEST['customer'];
@@ -60,7 +90,7 @@ case_add_transaction(){
 }
 
 
-case_get_product_by_id(){
+function case_get_product_by_id(){
 include ("product.php");
   $pid = $_REQUEST['productid'];
   $obj = new product();

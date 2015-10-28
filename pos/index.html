@@ -16,13 +16,14 @@
 <script type="text/javascript">
     var trans_id;
     var trans_val;
-    var threhold = 500;
+    var threshold = 500;
 
     $(document).ready(init_transaction());
 
     function init_transaction(){
       trans_id = "";
-      trans_val = 0;
+      //note to self: reset to 0;
+      trans_val = 540;
     }
 
     function generate_transaction_id(){
@@ -42,36 +43,33 @@
 
     $(function(){
         $("#scanbtn").click(function(){
-
           if(trans_id==""){
             generate_transaction_id();
           }
-
-            cordova.plugins.barcodeScanner.scan(
-                function (result) {
-                    getProduct(result.text);
-                },
-                function (error) {
-                    alert("Scanning failed: " + error);
-                }
-            );
+            // cordova.plugins.barcodeScanner.scan(
+                // function (result) {
+                    // getProduct(result.text);
+                    getProduct("83012016");
+                // },
+                // function (error) {
+                    // alert("Scanning failed: " + error);
+                // }
+            // );
         });
-
 
         $("#submitbtn").click(function(){
           //create transaction record: $transaction_id, $date, $time, $customer
           add_transaction();
-
           if (trans_val>=threshold){
             send_discount_code();
           }
-
           init_transaction();
         });
     });
 
     function send_discount_code() {
       var customer_val = $("#customer_phone").val();
+      alert(customer_val);
       var theUrl="../action.php?cmd=3&customer="+customer_val;
     }
 
@@ -82,8 +80,9 @@
       var customer_val = $("#customer_phone").val();
       var total_val = trans_val;
 
-      var theUrl="../action.php?cmd=2&transid="+trans_id+"&date="+the_date+"&time="+time_val+"&customer="
+      var theUrl="../action.php?cmd=2&transid="+trans_id+"&date="+date_val+"&time="+time_val+"&customer="
       +customer_val+"&value="+total_val;
+
       var obj=sendRequest(theUrl);		//send request to the above url
       if(obj.result==1){					//check result
 
@@ -98,6 +97,7 @@
         // Send request to server
         //u a url as a string
         //async is type of request
+        alert(u);
         var obj=$.ajax({url:u,async:false});
         //Convert the JSON string to object
         var result=$.parseJSON(obj.responseText);
@@ -120,43 +120,6 @@
           alert("error adding");//err
       }
     }
-
-
-/*
-    function add(){
-        var fn = $("#fname").val();
-        var ln = $("#lname").val();
-        var theUrl="hello.php?cmd=1&firstname="+fn+"&lastname="+ln;
-        var obj=sendRequest(theUrl);		//send request to the above url
-        if(obj.result==1){					//check result
-        }else{
-            //show error message
-            alert("error adding");//err
-        }
-    }
-function getPeople(){
-             var theUrl="hello.php?cmd=2";
-var obj=sendRequest(theUrl);		//send request to the above url
-        if(obj.result==1){					//check result
-var msb;
-            var listString = "";
-            for (var i = 0; i < obj.people.length; i++){
-             listString += "<li>";
-listString += obj.people[i].firstname;
-                listString += ": ";
-                listString += obj.people[i].lastname
-                listString += "</li>";
-            }
-                 $("#reading-list").html(listString);
-        }else{
-            //show error message
-            alert("error adding");//err
-        }
-}
-*/
-
-
-
 </script>
 
 
@@ -183,17 +146,17 @@ class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left ui-btn-a"
 <input type="tel" name="customer_phone" id="customer_phone" value="" placeholder="Phone Number" data-theme="a">
 
 <div data-role="popup" id="popupSetQty" data-theme="a" class="ui-corner-all">
-  <form>
+  <!-- <form> -->
     <div style="padding:10px 20px;">
       <h3 id="prod_name_display">Product Name</h3>
       <h4 id="prod_id_display">Code: Barcode</h4>
       <h4 id="prod_price_display">Price: GHc 0.00</h4>
       <h4>Please input the quantity</h4>
-      <label for="quantity" class="ui-hidden-accessible">Password:</label>
-      <input type="number" name="pass" id="quantity" value="" placeholder="quantity" data-theme="a">
-      <button type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-shop">Add to Cart</button>
+      <label for="quantity" class="ui-hidden-accessible">Quantity:</label>
+      <input type="number" name="quantity" id="quantity" value="" placeholder="quantity" data-theme="a">
+      <a href="" id="addtocartbtn" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-shop" data-rel="back" role="button">Add to Cart</a>
     </div>
-  </form>
+  <!-- </form> -->
 </div>
 
 <!--<a href="#pagetwo" data-role="button">Go To Other</a>-->

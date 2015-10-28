@@ -41,7 +41,7 @@ class customer extends adb{
    */
     function set_discount_code_invalid($customer, $code){
         $str_query="update pos_customer set discount_redeemed = 1 where customer='$customer' and disount_code='$code'";
-        return $this->query($str_query)
+        return $this->query($str_query);
     }
 
 
