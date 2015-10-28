@@ -17,13 +17,33 @@ switch ($cmd) {
     case_add_transaction();
     break;
 
-    case 3:
+  case 3:
       case_send_discount_code();
+      break;
+
+  case 4:
+      case_add_purchase();
       break;
 
   default:
     # code...
     break;
+}
+
+function case_add_purchase(){
+  include ("purchase.php");
+  $transaction_id = $_REQUEST['transid'];
+  $product_id = $_REQUEST['prodid'];
+  $qty = $_REQUEST['qty'];
+  $unit_price = $_REQUEST['unitprice'];
+  $price = $_REQUEST['sumprice'];
+  $obj = new purchase();
+
+  if($obj->add_purchase($product_id, $transaction_id, $qty, $price, $unit_price)){
+      echo '{"result":1,"message": "added successfully"}';
+  }else{
+      echo '{"result":0,"message": "transaction not added."}';
+  }
 }
 
 function case_send_discount_code(){

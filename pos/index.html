@@ -102,7 +102,7 @@
     }
 
     function add_transaction() {
-      var product_id = new Date();
+      var the_date = new Date();
       var date_val = the_date.getFullYear() + "-" + (the_date.getMonth()+1) + "-" + the_date.getDate();
       var time_val = the_date.getHours() + ":" + the_date.getMinutes() + ":" + the_date.getSeconds();
       var customer_val = $("#customer_phone").val();
@@ -125,14 +125,14 @@
     function add_purchase() {
       //create purchase record: $product_id, $transaction_id, $qty, $price, $unit_price
       var product_id = $("#prod_id_display").html();
+      alert(product_id);
       var product_price = $("#prod_price_display").html();
-      var product_quantity = $("#prod_quantity_display").html();
+      var product_quantity = $("#prod_quantity_display").val();
       var sum = (product_quantity * product_price);
-      total_val += sum;
+      trans_val += sum;
 
       var theUrl="../ajax-action.php?cmd=4&transid="+trans_id+"&prodid="+product_id+"&qty="+product_quantity+"&unitprice="
       +product_price+"&sumprice="+sum;
-
       var obj=sendRequest(theUrl);		//send request to the above url
       if(obj.result==1){					//check result
 
@@ -162,8 +162,8 @@
         var product_name = obj.product[0]['product_name'];
         var product_price = obj.product[0]['product_price'];
         $("#prod_name_display").html(product_name);
-        $("#prod_id_display").html("Barcode: "+code);
-        $("#prod_price_display").html("Price: GHc"+product_price);
+        $("#prod_id_display").html(code);
+        $("#prod_price_display").html(product_price);
 
         $("#simulateClick").trigger("click");
       }else{
@@ -200,11 +200,11 @@ class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left ui-btn-a"
   <!-- <form> -->
     <div style="padding:10px 20px;">
       <h3 id="prod_name_display">Product Name</h3>
-      <h4 id="prod_id_display">Code: Barcode</h4>
-      <h4 id="prod_price_display">Price: GHc 0.00</h4>
+      <h4>Barcode: <span id="prod_id_display">Barcode</span></h4>
+      <h4>Price: GHc <span id="prod_price_display">0.00</span></h4>
       <h5>Please input the quantity</h5>
       <label for="quantity" class="ui-hidden-accessible">Quantity:</label>
-      <input type="number" name="quantity" id="quantity" value="" placeholder="quantity" data-theme="a">
+      <input type="number" name="quantity" id="prod_quantity_display" value="" placeholder="quantity" data-theme="a">
       <a href="" id="addtocartbtn" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-shop" data-rel="back" role="button">Add to Cart</a>
     </div>
   <!-- </form> -->

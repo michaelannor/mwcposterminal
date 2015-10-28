@@ -19,7 +19,7 @@ class purchase extends adb{
    */
     function add_purchase($product_id, $transaction_id, $qty, $price, $unit_price){
         $str_query="insert into pos_purchase set product_id='$product_id',purchase_quantity='$qty',
-        purchase_price='$price',unit_price='$unit_price'";
+        purchase_price='$price',unit_price='$unit_price',transaction_id='$transaction_id'";
         return $this->query($str_query);
     }
 
