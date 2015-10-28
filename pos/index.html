@@ -125,16 +125,31 @@
     function add_purchase() {
       //create purchase record: $product_id, $transaction_id, $qty, $price, $unit_price
       var product_id = $("#prod_id_display").html();
-      alert(product_id);
+      var product_name = $("#prod_name_display").html();
       var product_price = $("#prod_price_display").html();
       var product_quantity = $("#prod_quantity_display").val();
       var sum = (product_quantity * product_price);
       trans_val += sum;
-
+      $("#total_val_view").html("GHc "+trans_val);
       var theUrl="../ajax-action.php?cmd=4&transid="+trans_id+"&prodid="+product_id+"&qty="+product_quantity+"&unitprice="
       +product_price+"&sumprice="+sum;
       var obj=sendRequest(theUrl);		//send request to the above url
+      var purchase_list;
       if(obj.result==1){					//check result
+          purchase_list = "";
+          purchase_list += "<li class='ui-li-static ui-body-inherit ui-li-has-thumb'><img src='pos_icon.png'><h2>";
+          purchase_list += product_name;
+          purchase_list += " ["+product_id+"]</h2><p>Price: ";
+          purchase_list += product_price;
+          purchase_list += "</p>";
+          purchase_list += "<p>Quantity: ";
+          purchase_list += product_quantity;
+          purchase_list += "</p>";
+          purchase_list += "<p>Subtotal: GHc ";
+          purchase_list += sum;
+          purchase_list += "</p></li>";
+
+          $("#purchase_list_ul").append(purchase_list);
 
       }else{
           //show error message
@@ -200,7 +215,7 @@ class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left ui-btn-a"
   <!-- <form> -->
     <div style="padding:10px 20px;">
       <h3 id="prod_name_display">Product Name</h3>
-      <h4>Barcode: <span id="prod_id_display">Barcode</span></h4>
+      <h4>Barcode: <span id="prod_id_display">######</span></h4>
       <h4>Price: GHc <span id="prod_price_display">0.00</span></h4>
       <h5>Please input the quantity</h5>
       <label for="quantity" class="ui-hidden-accessible">Quantity:</label>
@@ -212,26 +227,12 @@ class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left ui-btn-a"
 
 <!--<a href="#pagetwo" data-role="button">Go To Other</a>-->
 
-<ul data-role="listview" data-inset="true">
-    <li>
-      <img src="pos_icon.png">
-    <h2>Broken Bells</h2>
-    <p>Broken Bells</p></a>
-  </li>
-  <li>
-    <img src="icon.png">
-    <h2>Warning</h2>
-    <p>Hot Chip</p></a>
-  </li>
-  <li>
-    <img src="pos_icon.png">
-    <h2>Wolfgang Amadeus Phoenix</h2>
-    <p>Phoenix</p></a>
-  </li>
+<ul data-role="listview" data-inset="true" id="purchase_list_ul" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+
 </ul>
 
 <div>
-<h2 id="total_val" style="float:right;">Total: GHc 50.00</h2>
+<h2 id="total_val_view" style="float:right;">Total: GHc 0.00</h2>
 </div>
 <br><br><br><br>
 <a href="" data-rel="popup" data-position-to="window" id="submitbtn"
