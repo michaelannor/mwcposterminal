@@ -7,10 +7,18 @@
  */
 
 define("DB_HOST", 'localhost');
-define("DB_NAME", 'pos_terminal');
+define("DB_NAME", 'csashesi_michael-annor');
 define("DB_PORT", 3306);
-define("DB_USER","root");
-define("DB_PWORD","");
+define("DB_USER","csashesi_man16");
+define("DB_PWORD","db!E#Rqz2");
+
+// define("DB_HOST", 'localhost');
+// define("DB_NAME", 'pos_terminal');
+// define("DB_PORT", 3306);
+// define("DB_USER","root");
+// define("DB_PWORD","");
+
+
 define("LOG_LEVEL_SEC",0);
 define("LOG_LEVEL_DB_FAIL",0);
 
