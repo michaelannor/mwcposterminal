@@ -16,7 +16,7 @@ class customer extends adb{
    * @param [[Varchar]] $code [[The generated one-time use discount code]]
    */
     function add_customer($customer, $code){
-        $str_query="insert into pos_customer set customer='$customer',disount_code='$code'";
+        $str_query="insert into pos_customer set customer='$customer',discount_code='$code'";
         return $this->query($str_query);
     }
 

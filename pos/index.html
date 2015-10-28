@@ -70,7 +70,7 @@
     function send_discount_code() {
       var customer_val = $("#customer_phone").val();
       alert(customer_val);
-      var theUrl="../action.php?cmd=3&customer="+customer_val;
+      var theUrl="../ajax-action.php?cmd=3&customer="+customer_val;
     }
 
     function add_transaction() {
@@ -80,7 +80,7 @@
       var customer_val = $("#customer_phone").val();
       var total_val = trans_val;
 
-      var theUrl="../action.php?cmd=2&transid="+trans_id+"&date="+date_val+"&time="+time_val+"&customer="
+      var theUrl="../ajax-action.php?cmd=2&transid="+trans_id+"&date="+date_val+"&time="+time_val+"&customer="
       +customer_val+"&value="+total_val;
 
       var obj=sendRequest(theUrl);		//send request to the above url
@@ -105,7 +105,7 @@
     }
 
     function getProduct(code){
-      var theUrl="../action.php?cmd=1&productid="+code;
+      var theUrl="../ajax-action.php?cmd=1&productid="+code;
       var obj=sendRequest(theUrl);		//send request to the above url
       if(obj.result==1){					//check result
         var product_name = obj.product[0]['product_name'];
