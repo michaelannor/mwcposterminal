@@ -12,12 +12,12 @@
 
 <script src="jquery-2.1.4.min.js"></script>
 <script src="./jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script src="cordova.js"></script>
+<!-- <script src="cordova.js"></script> -->
 
 </script>
 <script type="text/javascript">
 
-  $support.cors=true;
+  // $support.cors=true;
 
     var trans_id = "";
     var trans_val = 0;
@@ -57,16 +57,16 @@
           if(trans_id==""){
             init_transaction();
           }
-            cordova.plugins.barcodeScanner.scan(
-                function (result) {
-                    getProduct(result.text);
+            // cordova.plugins.barcodeScanner.scan(
+                // function (result) {
+                    // getProduct(result.text);
                     // not to self, for web testing
-                    // getProduct("83012016");
-                },
-                function (error) {
-                    alert("Scanning failed: " + error);
-                }
-            );
+                    getProduct("83012016");
+                // },
+                // function (error) {
+                    // alert("Scanning failed: " + error);
+                // }
+            // );
         });
 
 
@@ -99,7 +99,7 @@
     function send_discount_code() {
       var customer_val = $("#customer_phone").val();
       // alert(customer_val);
-      var theUrl="cs.ashesi.edu.gh/class2016/michael-annor/mwc-midsem/ajax-action.php?cmd=3&customer="+customer_val;
+      var theUrl="http://cs.ashesi.edu.gh/class2016/michael-annor/mwc-midsem/ajax-action.php?cmd=3&customer="+customer_val;
 
       var obj=sendRequest(theUrl);		//send request to the above url
       if(obj.result==1){					//check result
@@ -119,7 +119,7 @@
       var customer_val = $("#customer_phone").val();
       var total_val = trans_val;
 
-      var theUrl="cs.ashesi.edu.gh/class2016/michael-annor/mwc-midsem/ajax-action.php?cmd=2&transid="+trans_id+"&date="+date_val+"&time="+time_val+"&customer="
+      var theUrl="http://cs.ashesi.edu.gh/class2016/michael-annor/mwc-midsem/ajax-action.php?cmd=2&transid="+trans_id+"&date="+date_val+"&time="+time_val+"&customer="
       +customer_val+"&value="+total_val;
 
       var obj=sendRequest(theUrl);		//send request to the above url
@@ -143,7 +143,7 @@
       if (product_quantity > 0){
       trans_val += sum;
       $("#total_val_view").html("Total: GHc "+trans_val);
-      var theUrl="cs.ashesi.edu.gh/class2016/michael-annor/mwc-midsem/ajax-action.php?cmd=4&transid="+trans_id+"&prodid="+product_id+"&qty="+product_quantity+"&unitprice="
+      var theUrl="http://cs.ashesi.edu.gh/class2016/michael-annor/mwc-midsem/ajax-action.php?cmd=4&transid="+trans_id+"&prodid="+product_id+"&qty="+product_quantity+"&unitprice="
       +product_price+"&sumprice="+sum;
       var obj=sendRequest(theUrl);		//send request to the above url
       var purchase_list;
@@ -189,7 +189,7 @@
     }
 
     function getProduct(code){
-      var theUrl="cs.ashesi.edu.gh/class2016/michael-annor/mwc-midsem/ajax-action.php?cmd=1&productid="+code;
+      var theUrl="http://cs.ashesi.edu.gh/class2016/michael-annor/mwc-midsem/ajax-action.php?cmd=1&productid="+code;
       var obj=sendRequest(theUrl);		//send request to the above url
       if(obj.result==1){					//check result
         var product_name = obj.product[0]['product_name'];
