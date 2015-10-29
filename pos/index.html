@@ -12,12 +12,12 @@
 
 <script src="jquery-2.1.4.min.js"></script>
 <script src="./jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<!-- <script src="cordova.js"></script> -->
+<script src="cordova.js"></script>
 
 </script>
 <script type="text/javascript">
 
-  // $support.cors=true;
+  $.support.cors=true;
 
     var trans_id = "";
     var trans_val = 0;
@@ -57,16 +57,20 @@
           if(trans_id==""){
             init_transaction();
           }
-            // cordova.plugins.barcodeScanner.scan(
-                // function (result) {
-                    // getProduct(result.text);
+            cordova.plugins.barcodeScanner.scan(
+                function (result) {
+                  alert("We got a barcode\n" +
+          "Result: " + result.text + "\n" +
+          "Format: " + result.format + "\n" +
+          "Cancelled: " + result.cancelled);
+                    getProduct(result.text);
                     // not to self, for web testing
-                    getProduct("83012016");
-                // },
-                // function (error) {
-                    // alert("Scanning failed: " + error);
-                // }
-            // );
+                    // getProduct("83012016");
+                },
+                function (error) {
+                    alert("Scanning failed: " + error);
+                }
+            );
         });
 
 
