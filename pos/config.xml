@@ -21,5 +21,6 @@ Point of Sale Terminal for MWC fall 2015 Mid-Semester Project
 <allow-intent href="*" />
 <access origin="*" />
 
+<preference name="Orientation" value="portrait" />
 
 </widget>
