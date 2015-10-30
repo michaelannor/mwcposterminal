@@ -7,6 +7,7 @@ $.support.cors=true;
   $(document).ready(null_trans());
 
   function null_trans(){
+    alert("welcome to the app; separate script.js file works");
     trans_id = "";
     trans_val = 0;
   }
