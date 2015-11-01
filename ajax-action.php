@@ -29,9 +29,36 @@ switch ($cmd) {
     case_add_product();
     break;
 
+  case 6:
+    case_get_all_products();
+    break;
+
   default:
     # code...
     break;
+}
+
+function case_get_all_products(){
+include ("product.php");
+  $obj = new product();
+
+  $row = $obj->get_all_products();
+  if ($row){
+  //return a JSON string to browser when request comes to get description
+  //generate the JSON message to echo to the browser
+    echo '{"result":1,"product":[';	//start of json object
+    while($row){
+    echo json_encode($row);			//convert the result array to json object
+    $row=$obj->fetch();
+    if ($row){
+      echo ",";
+    }
+  }
+    echo "]}";							//end of json array and object
+  }
+  else{
+    echo '{"result":0,"message": "product not got."}';
+  }
 }
 
 function case_add_product(){
