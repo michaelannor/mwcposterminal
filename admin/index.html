@@ -27,17 +27,17 @@ View Inventory (Prod & Qtys)
 <div data-role="navbar">
   <ul>
     <li>
-      <a href="#stockpage" data-icon="bullets" data-transition="slidedown">
+      <a href="#stockpage" data-icon="bullets" data-transition="fade">
         Stock
       </a>
     </li>
     <li>
-      <a href="#addpage" data-icon="plus" data-transition="slidedown" onclick="">
+      <a href="#addpage" data-icon="plus" data-transition="fade" onclick="">
         Add Product
       </a>
     </li>
     <li>
-      <a href="#updatepage" data-icon="edit" data-transition="slidedown">
+      <a href="#updatepage" data-icon="edit" data-transition="fade">
         Update
       </a>
     </li>
@@ -97,7 +97,7 @@ View Inventory (Prod & Qtys)
        Subtotal: GHc 12.80
      </p>
    </li>
-   
+
  </ul>
 
  </div><!-- /content -->
@@ -154,13 +154,10 @@ View Inventory (Prod & Qtys)
        <label for="quantity" class="ui-hidden-accessible">Quantity:</label>
        <input type="number" name="quantity" id="add_prod_quantity_display" value="" placeholder="quantity" data-theme="a">
 
-       <a href="" id="addtostockbtn" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-shop" data-rel="back" role="button">Add to Stock</a>
+       <a href="" id="addtostockbtn" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-check" data-rel="" role="button">Add to Stock</a>
 
      </div>
 
-
- <ul data-role="listview" data-inset="true" id="product_list_ul" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
- </ul>
 
  </div><!-- /content -->
 
@@ -200,9 +197,17 @@ View Inventory (Prod & Qtys)
 
 <!-- content -->
  <div role="main" class="ui-content">
-3
- <ul data-role="listview" data-inset="true" id="product_list_ul" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
- </ul>
+
+   <div style="padding:10px 20px;">
+
+     <h3>Please enter the product to edit</h3>
+
+     <label for="barcode" class="ui-hidden-accessible">Barcode:</label>
+     <input type="number" name="barcode" id="update_prod_id_display" value="" placeholder="barcode" data-theme="a">
+
+     <a href="#updatedetailspage" id="addtostockbtn" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-check" data-rel="" role="button">Add to Stock</a>
+
+   </div>
 
  </div><!-- /content -->
 
@@ -211,6 +216,63 @@ View Inventory (Prod & Qtys)
    <h1>Made With Love in Berekuso</h1>
  </div><!-- /footer -->
 </div><!-- /Update -->
+
+
+<!-- Update Stock Details -->
+ <div data-role="page" id="updatedetailspage" data-theme="a">
+<!-- header -->
+ <div data-role="header">
+ <h1>Inventory</h1>
+ <!-- navbar -->
+<div data-role="navbar">
+  <ul>
+    <li>
+      <a href="#stockpage" data-icon="bullets" data-transition="slidedown">
+        Stock
+      </a>
+    </li>
+    <li>
+      <a href="#addpage" data-icon="plus" data-transition="slidedown" onclick="">
+        Add Product
+      </a>
+    </li>
+    <li>
+      <a href="#updatepage" data-icon="edit" data-transition="slidedown">
+        Update
+      </a>
+    </li>
+  </ul>
+</div><!-- /navbar -->
+ </div><!-- /header -->
+
+<!-- content -->
+ <div role="main" class="ui-content">
+
+   <div style="padding:10px 20px;">
+
+     <h3>Please input the product details</h3>
+
+     <label for="barcode" class="ui-hidden-accessible">Barcode:</label>
+     <input type="number" name="barcode" id="update_prod_id_display" value="" placeholder="barcode" data-theme="a">
+
+     <label for="price" class="ui-hidden-accessible">Price:</label>
+     <input type="number" name="price" id="update_prod_price_display" value="" placeholder="price" data-theme="a">
+
+     <label for="quantity" class="ui-hidden-accessible">Quantity:</label>
+     <input type="number" name="quantity" id="update_prod_quantity_display" value="" placeholder="quantity" data-theme="a">
+
+     <a href="#updatepage" id="addtostockbtn" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-check" data-rel="" role="button">Add to Stock</a>
+
+   </div>
+
+ </div><!-- /content -->
+
+<!-- footer -->
+ <div data-role="footer">
+   <h1>Made With Love in Berekuso</h1>
+ </div><!-- /footer -->
+</div><!-- /Updatedetails -->
+
 
 <body>
 
