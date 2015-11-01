@@ -47,8 +47,57 @@ View Inventory (Prod & Qtys)
 
 <!-- content -->
  <div role="main" class="ui-content">
-1
+
  <ul data-role="listview" data-inset="true" id="product_list_ul" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+   <li class='ui-li-static ui-body-inherit ui-li-has-thumb'>
+     <img src='inventory-icon.png'>
+     <h2>
+       Product Name [00000001]
+     </h2>
+     <p>
+       Price: GHc 3.20
+     </p>
+     <p>
+       Quantity: 4
+     </p>
+     <p>
+       Subtotal: GHc 12.80
+     </p>
+   </li>
+
+   <li class='ui-li-static ui-body-inherit ui-li-has-thumb'>
+     <img src='inventory-icon.png'>
+     <h2>
+       Product Name [00000001]
+     </h2>
+     <p>
+       Price: GHc 3.20
+     </p>
+     <p>
+       Quantity: 4
+     </p>
+     <p>
+       Subtotal: GHc 12.80
+     </p>
+   </li>
+
+
+   <li class='ui-li-static ui-body-inherit ui-li-has-thumb'>
+     <img src='inventory-icon.png'>
+     <h2>
+       Product Name [00000001]
+     </h2>
+     <p>
+       Price: GHc 3.20
+     </p>
+     <p>
+       Quantity: 4
+     </p>
+     <p>
+       Subtotal: GHc 12.80
+     </p>
+   </li>
+   
  </ul>
 
  </div><!-- /content -->
@@ -88,7 +137,28 @@ View Inventory (Prod & Qtys)
 
 <!-- content -->
  <div role="main" class="ui-content">
-2
+
+     <div style="padding:10px 20px;">
+
+       <h3>Please input the product details</h3>
+
+       <label for="name" class="ui-hidden-accessible">Name:</label>
+       <input type="number" name="name" id="add_prod_name_display" value="" placeholder="price" data-theme="a">
+
+       <label for="barcode" class="ui-hidden-accessible">Barcode:</label>
+       <input type="number" name="barcode" id="add_prod_id_display" value="" placeholder="barcode" data-theme="a">
+
+       <label for="price" class="ui-hidden-accessible">Price:</label>
+       <input type="number" name="price" id="add_prod_price_display" value="" placeholder="price" data-theme="a">
+
+       <label for="quantity" class="ui-hidden-accessible">Quantity:</label>
+       <input type="number" name="quantity" id="add_prod_quantity_display" value="" placeholder="quantity" data-theme="a">
+
+       <a href="" id="addtostockbtn" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-shop" data-rel="back" role="button">Add to Stock</a>
+
+     </div>
+
+
  <ul data-role="listview" data-inset="true" id="product_list_ul" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
  </ul>
 
