@@ -1,4 +1,4 @@
-$(document).ready();
+$(document).ready(viewAllProducts());
 
 $(function(){
     $("#add_to_stock_btn").click(function(){
@@ -32,21 +32,36 @@ function sendRequest(u){
     return result;	//return object
 }
 
-function fnName(){
+function viewAllProducts(){
 
-  var theUrl="http://cs.ashesi.edu.gh/class2016/michael-annor/mwc-midsem/ajax-action.php?cmd=1&productid="+code;
+  var theUrl="http://cs.ashesi.edu.gh/class2016/michael-annor/mwc-midsem/ajax-action.php?cmd=6";
   var obj=sendRequest(theUrl);		//send request to the above url
   if(obj.result==1){					//check result
-    var product_name = obj.product[0]['product_name'];
-    var product_price = obj.product[0]['product_price'];
-    $("#prod_name_display").html(product_name);
-    $("#prod_id_display").html(code);
-    $("#prod_price_display").html(product_price);
 
-    $("#simulateClick").trigger("click");
+    var product_list;
+    // if(obj.result==1){					//check result
+        product_list = "";
+        for (var i = 0; i < obj.product.length; i++) {
+          // obj.product_name[i]
+          product_list += "<li class='ui-li-static ui-body-inherit ui-li-has-thumb'><img src='pos_icon.png'><h2>";
+          product_list += obj.product[i].product_name;
+          product_list += " ["+obj.product[i].product_id+"]</h2><p>Price: ";
+          product_list += obj.product[i].product_price;
+          product_list += "</p>";
+          product_list += "<p>Quantity: ";
+          product_list += obj.product[i].product_quantity;
+          product_list += "</p>";
+          product_list += "</li>";
+
+        }
+
+
+        $("#product_list_ul").append(product_list);
+
+    // $("#simulateClick").trigger("click");
   }else{
       //show error message
-      alert("error: product not in database");//err
+      alert("error: couldn't fetch products");//err
   }
 }
 
