@@ -1,9 +1,13 @@
 $(document).ready();
 
 $(function(){
-    $("#btnid").click(function(){
-
-
+    $("#add_to_stock_btn").click(function(){
+      // add product to database
+      addProduct();
+      $("#add_prod_id_display").val("");
+      $("#add_prod_name_display").val("");
+      $("#add_prod_price_display").val("");
+      $("#add_prod_quantity_display").val("");
     });
 
 
@@ -47,12 +51,13 @@ function fnName(){
 }
 
 function addProduct(){
-  var product_id = $("#add_prod_id_display").html();
-  var product_name = $("#add_prod_name_display").html();
-  var product_price = $("#add_prod_price_display").html();
+  var product_id = $("#add_prod_id_display").val();
+  var product_name = $("#add_prod_name_display").val();
+  var product_price = $("#add_prod_price_display").val();
   var product_quantity = $("#add_prod_quantity_display").val();
-  // var theUrl="http://cs.ashesi.edu.gh/class2016/michael-annor/mwc-midsem/ajax-action.php?cmd=5&prodid="+product_id+"&name="+product_name+"&price="+product_price+"&qty="+product_quantity;
-  var theUrl="../ajax-action.php?cmd=5&prodid="+product_id+"&name="+product_name+"&price="+product_price+"&qty="+product_quantity;
+  var theUrl="http://cs.ashesi.edu.gh/class2016/michael-annor/mwc-midsem/ajax-action.php?cmd=5&prodid="+product_id+"&name="+product_name+"&price="+product_price+"&qty="+product_quantity;
+  // var theUrl="../ajax-action.php?cmd=5&prodid="+product_id+"&name="+product_name+"&price="+product_price+"&qty="+product_quantity;
+  // alert(theUrl);
   var obj=sendRequest(theUrl);  //send request to the above url
   if(obj.result==1){
 
