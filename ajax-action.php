@@ -25,9 +25,28 @@ switch ($cmd) {
       case_add_purchase();
       break;
 
+  case 5:
+    case_add_product();
+    break;
+
   default:
     # code...
     break;
+}
+
+function case_add_product(){
+  include ("product.php");
+  $product_id = $_REQUEST['prodid'];
+  $product_name = $_REQUEST['name'];
+  $product_price = $_REQUEST['price'];
+  $product_quantity = $_REQUEST['qty'];
+  $obj = new product();
+
+  if($obj->add_product($product_id, $product_name, $product_price, $product_quantity)){
+      echo '{"result":1,"message": "added successfully"}';
+  }else{
+      echo '{"result":0,"message": "transaction not added."}';
+  }
 }
 
 function case_add_purchase(){
