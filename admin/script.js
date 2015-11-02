@@ -1,4 +1,4 @@
-$(document).ready(viewAllProducts());
+$(document).ready();
 
 $(function(){
     $("#add_to_stock_btn").click(function(){
@@ -11,8 +11,8 @@ $(function(){
     });
 
 
-    $("#btnid").click(function(){
-
+    $("#update_porduct_btn").click(function(){
+      // viewAllProducts();
     });
 
     $("#btnid").click(function(){
@@ -43,7 +43,7 @@ function viewAllProducts(){
         product_list = "";
         for (var i = 0; i < obj.product.length; i++) {
           // obj.product_name[i]
-          product_list += "<li class='ui-li-static ui-body-inherit ui-li-has-thumb'><img src='pos_icon.png'><h2>";
+          product_list += "<li class='ui-li-static ui-body-inherit ui-li-has-thumb'><img src='inventory-icon.png'><h2>";
           product_list += obj.product[i].product_name;
           product_list += " ["+obj.product[i].product_id+"]</h2><p>Price: ";
           product_list += obj.product[i].product_price;
@@ -54,9 +54,8 @@ function viewAllProducts(){
           product_list += "</li>";
 
         }
-
-
-        $("#product_list_ul").append(product_list);
+        //note to self #when to call this. at on ready ul isn't created
+        $("#product_list_ul").html(product_list);
 
     // $("#simulateClick").trigger("click");
   }else{
