@@ -1,4 +1,9 @@
-$(document).ready();
+// $(document).ready(viewAllProducts());
+// $(window).load(viewAllProducts());
+
+$(window).load(function() {
+  viewAllProducts();
+});
 
 $(function(){
     $("#add_to_stock_btn").click(function(){
@@ -51,10 +56,17 @@ function viewAllProducts(){
           product_list += "<p>Quantity: ";
           product_list += obj.product[i].product_quantity;
           product_list += "</p>";
+          product_list += "<a href='' class='ui-shadow ui-btn-right ui-corner-all ui-btn-inline ui-icon-edit ui-btn-icon-notext ui-btn-b ui-mini'></a>";
           product_list += "</li>";
 
         }
         //note to self #when to call this. at on ready ul isn't created
+        /*<form action="demo_form.asp">
+  Country: <input type="text" name="country" value="Norway" readonly><br>
+  <input type="submit" value="Submit">
+</form>*/
+/*
+$('#inputId').prop('readonly', true);*/
         $("#product_list_ul").html(product_list);
 
     // $("#simulateClick").trigger("click");
