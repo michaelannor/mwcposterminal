@@ -11,12 +11,6 @@
   <script src="script.js"></script>
 
 </head>
-<!--
-Owner should be able to add and set prices - DONE
-**Change prices & WQtys
-View Inventory (Prod & Qtys)
-
- -->
 <body>
 <!-- View Inventory -->
  <div data-role="page" id="stockpage" data-theme="a">
@@ -137,7 +131,8 @@ View Inventory (Prod & Qtys)
      <h3>Please enter the product to edit</h3>
      <label for="barcode" class="ui-hidden-accessible">Barcode:</label>
      <input type="number" name="barcode" id="update_prod_id_display" value="" placeholder="barcode" data-theme="a">
-     <a href="#updatedetailspage" id="update_prod_by_id_btn" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-check" data-rel="" role="button">Update This Product</a>
+     <a href="" id="update_prod_by_id_btn" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-check" data-rel="" role="button">Update This Product</a>
+     <a href="#updatedetailspage" id="move_to_update_details_btn"></a>
    </div>
  </div><!-- /content -->
 <!-- footer -->
@@ -176,8 +171,10 @@ View Inventory (Prod & Qtys)
  <div role="main" class="ui-content">
    <div style="padding:10px 20px;">
      <h3>Please input the product details</h3>
-     <label for="barcode" class="ui-hidden-accessible">Barcode:</label>
-     <input type="number" name="barcode" id="update_details_id_display" value="" placeholder="barcode" data-theme="a">
+     <h4 id="update_details_name_display"></h4>
+     <h4 id="update_details_id_display"></h4>
+     <!-- <label for="barcode" class="ui-hidden-accessible">Barcode:</label>
+     <input type="number" name="barcode" id="update_details_id_display" value="" placeholder="barcode" data-theme="a"> -->
      <label for="price" class="ui-hidden-accessible">Price:</label>
      <input type="number" name="price" id="update_details_price_display" value="" placeholder="price" data-theme="a">
      <label for="quantity" class="ui-hidden-accessible">Quantity:</label>

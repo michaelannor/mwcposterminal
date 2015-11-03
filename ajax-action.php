@@ -45,13 +45,12 @@ switch ($cmd) {
 function case_update_product(){
   include ("product.php");
   $product_id = $_REQUEST['prodid'];
-  $product_name = $_REQUEST['name'];
   $product_price = $_REQUEST['price'];
   $product_quantity = $_REQUEST['qty'];
   $obj = new product();
 
-  if($obj->update_product_details($product_id, $product_name, $product_price, $product_quantity)){
-      echo '{"result":1,"message": "added successfully"}';
+  if($obj->update_product_details($product_id, $product_price, $product_quantity)){
+      echo '{"result":1,"message": "edited successfully"}';
   }else{
       echo '{"result":0,"message": "transaction not added."}';
   }
