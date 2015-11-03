@@ -58,7 +58,6 @@ function viewAllProducts(){
           product_list += "</p>";
           product_list += "<a href='' class='ui-shadow ui-btn-right ui-corner-all ui-btn-inline ui-icon-edit ui-btn-icon-notext ui-btn-b ui-mini'></a>";
           product_list += "</li>";
-
         }
         //note to self #when to call this. at on ready ul isn't created
         /*<form action="demo_form.asp">

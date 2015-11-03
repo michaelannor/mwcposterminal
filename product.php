@@ -45,6 +45,16 @@ class product extends adb{
         return $this->fetch();
     }
 
+    /**
+     * [[The update_product_details is a function to update the details of a product in stock]]
+     * @param [[Int]] $id [[Transaction id]]
+     * @param [[Decimal]] $value [[The totlal value of the transaction]]
+     */
+      function update_product_details($product_id, $product_name, $product_price, $product_quantity){
+          $str_query="update pos_product set product_id='$id',product_name='$name',
+          product_price='$price',product_quantity='$quantity' where product_id='$product_id'";
+          return $this->query($str_query);
+      }
 
 
 

@@ -33,13 +33,32 @@ switch ($cmd) {
     case_get_all_products();
     break;
 
+  case 7:
+    case_update_product();
+    break;
+
   default:
     # code...
     break;
 }
 
+function case_update_product(){
+  include ("product.php");
+  $product_id = $_REQUEST['prodid'];
+  $product_name = $_REQUEST['name'];
+  $product_price = $_REQUEST['price'];
+  $product_quantity = $_REQUEST['qty'];
+  $obj = new product();
+
+  if($obj->update_product_details($product_id, $product_name, $product_price, $product_quantity)){
+      echo '{"result":1,"message": "added successfully"}';
+  }else{
+      echo '{"result":0,"message": "transaction not added."}';
+  }
+}
+
 function case_get_all_products(){
-include ("product.php");
+  include ("product.php");
   $obj = new product();
 
   $row = $obj->get_all_products();
