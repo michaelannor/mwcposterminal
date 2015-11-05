@@ -12,7 +12,8 @@
 
 <link rel="stylesheet" href="css/pure-min.css">
 
-
+<script src="js/vendor/jquery-2.1.4.min.js"></script>
+<script src="js/script.js"></script>
 
 <!--[if lte IE 8]>
 
@@ -81,8 +82,22 @@
 
 
             <div class="posts">
-                <h1 class="content-subhead">Recent Posts</h1>
+                <h1 class="content-subhead" id="pagetitle">Recent Posts</h1>
 
+
+                <table class="pure-table pure-u-1-1" >
+                  <thead class="pure-table pure-u-1-1">
+                    <tr>
+                      <th class="pure-u-1-5">Product</th>
+                      <th class="pure-u-1-5">ID</th>
+                      <th class="pure-u-1-5">Price</th>
+                      <th class="pure-u-1-5">Quantity</th>
+                      <th class="pure-u-1-5">Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody id="product_list_ul" class="pure-table pure-u-1-1">
+                  </tbody>
+                </table>
 
 
             <div class="footer">

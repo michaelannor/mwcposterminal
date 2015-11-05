@@ -106,9 +106,9 @@ function viewAllProducts(){
           product_list += "</td>";
           product_list += "<td>";
           product_list += obj.product[i].product_quantity;
-          product_list += "<tdp>";
+          product_list += "</td>";
           product_list += "<td><a href='#updatedetailspage' onclick='getProductFromList("+id+")' class='ui-shadow ui-btn-right ui-corner-all ui-btn-inline ui-icon-edit ui-btn-icon-notext ui-btn-b ui-mini'></a></td>";
-          product_list += "</tr>";
+          product_list += "<td>Edit</td></tr>";
         }
 
         $("#product_list_ul").html(product_list);
