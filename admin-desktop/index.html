@@ -12,6 +12,7 @@
 
         <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/script.css">
 
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
@@ -22,12 +23,12 @@
 
         <div class="header-container">
             <header class="wrapper clearfix">
-                <h1 class="title">h1.title</h1>
+                <h1 class="title">Inventory</h1>
                 <nav>
                     <ul>
-                        <li><a href="#">nav ul li a</a></li>
-                        <li><a href="#">nav ul li a</a></li>
-                        <li><a href="#">nav ul li a</a></li>
+                        <li><a href="#">Stock</a></li>
+                        <li><a href="#">Add Product</a></li>
+                        <li><a href="#">Update Stock</a></li>
                     </ul>
                 </nav>
             </header>
@@ -36,13 +37,25 @@
         <div class="main-container">
             <div class="main wrapper clearfix">
 
+              <!-- View Inventory -->
+               <div data-role="page" id="stockpage" data-theme="a">
+
+              <!-- content -->
+               <div role="main" class="ui-content">
+
+               <ul data-role="listview" data-inset="true" id="product_list_ul" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+               </ul>
+
+               </div><!-- /content -->
+
+
 
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 
         <div class="footer-container">
             <footer class="wrapper">
-                <h3>footer</h3>
+                <h3>Made With Love in Berekuso</h3>
             </footer>
         </div>
 
