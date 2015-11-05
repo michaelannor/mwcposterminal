@@ -95,7 +95,7 @@ function viewAllProducts(){
 
     var product_list;
     // if(obj.result==1){					//check result
-        product_list = "";
+        product_list = "<table class='pure-table' width=100%><thead class='pure-table'><tr><th>Product</th><th>ID</th><th>Price</th><th>Quantity</th><th>Action</th></tr></thead><tbody id='product_list_ul' class='pure-table'>";
         for (var i = 0; i < obj.product.length; i++) {
           var id = obj.product[i].product_id;
           // obj.product_name[i]
@@ -107,11 +107,11 @@ function viewAllProducts(){
           product_list += "<td>";
           product_list += obj.product[i].product_quantity;
           product_list += "</td>";
-          product_list += "<td><a href='#updatedetailspage' onclick='getProductFromList("+id+")' class='ui-shadow ui-btn-right ui-corner-all ui-btn-inline ui-icon-edit ui-btn-icon-notext ui-btn-b ui-mini'></a></td>";
-          product_list += "<td>Edit</td></tr>";
+          product_list += "<td><a href='#updatedetailspage' onclick='getProductFromList("+id+")' class='ui-shadow ui-btn-right ui-corner-all ui-btn-inline ui-icon-edit ui-btn-icon-notext ui-btn-b ui-mini'>Edit</a></td>";
+          product_list += "</tr>";
         }
-
-        $("#product_list_ul").html(product_list);
+        product_list += "</tbody></table>"
+        $("#divcontent").html(product_list);
 
     // $("#simulateClick").trigger("click");
   }else{
