@@ -56,6 +56,17 @@ class product extends adb{
           return $this->query($str_query);
       }
 
+      /**
+       * [[The decrement_quantity is a function to decrease the quantity in stock after a transaction]]
+       * @param [[Int]] $id [[Transaction id]]
+       * @param [[Int]] $product_quantity [[The quantity to reduce by]]
+       */
+        function decrement_quantity($product_id, $product_quantity){
+            $str_query="update pos_product set product_quantity=product_quantity-'$product_quantity'
+            where product_id='$product_id'";
+            return $this->query($str_query);
+        }
+
 
 
 }

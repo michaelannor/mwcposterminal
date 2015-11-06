@@ -186,6 +186,6 @@ $.support.cors=true;
       $("#simulateClick").trigger("click");
     }else{
         //show error message
-        alert("error: product not in database");//err
+        alert("error: " + obj.message);//err
     }
   }

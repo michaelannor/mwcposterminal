@@ -105,9 +105,22 @@ function case_add_purchase(){
 
   if($obj->add_purchase($product_id, $transaction_id, $qty, $price, $unit_price)){
       echo '{"result":1,"message": "added successfully"}';
+      decrease_product_quantity($product_id, $qty);
   }else{
       echo '{"result":0,"message": "transaction not added."}';
   }
+}
+
+function decrease_product_quantity($id, $qty){
+  include ("product.php");
+    $obj = new product();
+
+    if($obj->decrement_quantity($id, $qty)){
+      //worked
+    }
+    else{
+      //did not work
+    }
 }
 
 function case_send_discount_code(){
@@ -131,7 +144,8 @@ function case_send_discount_code(){
 //helper method to send sms through smsgh
 function send_sms($phone, $msg) {
   // Here we assume the user is using the combination of his clientId and clientSecret as credentials
-    $auth = new BasicAuth("jokyhrvs", "volkzmqn");
+    // $auth = new BasicAuth("jokyhrvs", "volkzmqn");
+    $auth = new BasicAuth("igkoydll", "dngiqlfo");
     // instance of ApiHost
     $apiHost = new ApiHost($auth);
     $enableConsoleLog = FALSE;
@@ -181,17 +195,22 @@ include ("product.php");
   $pid = $_REQUEST['productid'];
   $obj = new product();
 
-$row = $obj->get_product_by_id($pid);
+  $row = $obj->get_product_by_id($pid);
   //return a JSON string to browser when request comes to get description
 
   if($row){
+    if($row['product_quantity']>0){
   //generate the JSON message to echo to the browser
     echo '{"result":1,"product":[';	//start of json object
     echo json_encode($row);			//convert the result array to json object
     echo "]}";							//end of json array and object
   }
   else{
-    echo '{"result":0,"message": "product not got."}';
+    echo '{"result":0,"message": "product out of stock."}';
+  }
+  }
+  else{
+    echo '{"result":0,"message": "product not in database."}';
   }
 }
 
