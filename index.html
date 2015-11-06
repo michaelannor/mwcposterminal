@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="./jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+
+<!-- <link rel="stylesheet" href="themes/mwcminiprojecttheme.min.css" /> -->
+<!-- <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" /> -->
+
+<script src="jquery-2.1.4.min.js"></script>
+<script src="./jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="cordova.js"></script>
+
+<script src="script.js"></script>
+
+</head>
+
+<body>
+<div data-role="page" id="pageone" data-theme="a">
+
+<div data-role="header">
+<h1>Point of Sale</h1>
+
+</div>
+
+<div role="main" class="ui-content">
+
+<!-- <a href="#popupSetQty" data-role=button data-inline=false id="scanbtn">Scan Product</a> -->
+
+<a href="#popupSetQty" data-rel="popup" data-position-to="window"  id="simulateClick" data-transition="pop">
+
+<a href="" id="scanbtn"
+class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left ui-btn-a"
+>Scan Product</a>
+
+<input type="tel" name="customer_phone" id="customer_phone" value="" placeholder="Phone Number" data-theme="a">
+
+<div data-role="popup" id="popupSetQty" data-theme="a" class="ui-corner-all">
+  <!-- <form> -->
+    <div style="padding:10px 20px;">
+      <h3 id="prod_name_display">Product Name</h3>
+      <h4>Barcode: <span id="prod_id_display">######</span></h4>
+      <h4>Price: GHc <span id="prod_price_display">0.00</span></h4>
+      <h5>Please input the quantity</h5>
+      <label for="quantity" class="ui-hidden-accessible">Quantity:</label>
+      <input type="number" name="quantity" id="prod_quantity_display" value="" placeholder="quantity" data-theme="a">
+      <a href="" id="addtocartbtn" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-btn-icon-left ui-icon-shop" data-rel="back" role="button">Add to Cart</a>
+    </div>
+  <!-- </form> -->
+</div>
+
+<ul data-role="listview" data-inset="true" id="purchase_list_ul" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+
+</ul>
+
+<div>
+<h2 id="total_val_view" style="float:right;">Total: GHc 0.00</h2>
+</div>
+<br><br><br><br>
+<a href="" data-rel="popup" data-position-to="window" id="submitbtn"
+class="ui-btn ui-corner-all ui-shadow ui-icon-shop ui-btn-icon-left ui-btn-a"
+data-transition="pop">Submit</a>
+
+</div>
+
+
+<div data-role="footer"> <h1>Made With Love in Berekuso</h1>
+</div> </div>
+
+
+
+</body> </html>
