@@ -68,6 +68,7 @@ function updateProductByID() {
   update_details += "<i class='fa fa-shopping-cart fa-lg'></i>Save Changes</a></fieldset></div>";
 
   $("#divcontent").html(update_details);
+  $("#pagetitle").html("Update Product");
 
   $("#update_details_id_display").html("Barcode: "+product_id);
   getProduct(product_id);
@@ -77,7 +78,7 @@ function updateProductByID() {
 }
 
 function getProductFromList(product_id){
-  alert(product_id);
+  // alert(product_id);
 
   var update_details;
   update_details = "<div class='pure-form pure-form-stacked'><fieldset><legend>Please input the product details</legend><h4 id='update_details_name_display'></h4><h4 id='update_details_id_display'></h4>";
@@ -86,6 +87,7 @@ function getProductFromList(product_id){
   update_details += "<i class='fa fa-shopping-cart fa-lg'></i>Save Changes</a></fieldset></div>";
 
   $("#divcontent").html(update_details);
+  $("#pagetitle").html("Update Product");
 
   $("#update_details_id_display").html(product_id);
   getProduct(product_id);
@@ -105,6 +107,7 @@ function getProduct(code){
   }else{
       //show error message
       alert("error: product not in database");//err
+      loadEditPage();
   }
 }
 
@@ -154,6 +157,7 @@ function viewAllProducts(){
         }
         product_list += "</tbody></table>"
         $("#divcontent").html(product_list);
+        $("#pagetitle").html("Product List");
 
     // $("#simulateClick").trigger("click");
   }else{
@@ -171,6 +175,8 @@ function loadAddPage(){
   add_page += "<input class='pure-input-1' id='add_prod_quantity_display' name='quantity' type='number' placeholder='Quantity'><br>";
   add_page += "<a style='float:right;' type='' id='add_to_stock_btn' class='pure-button' href='#' onclick='addProductToStock()'><i class='fa fa-shopping-cart fa-lg'></i>Add to Stock</a></fieldset></div>";
   $("#divcontent").html(add_page);
+  $("#pagetitle").html("New Product");
+
 }
 
 function loadEditPage() {
@@ -178,6 +184,8 @@ function loadEditPage() {
   edit_page = "<div class='pure-form pure-form-stacked'><fieldset><legend>Please input the product id</legend><label for='barcode'>Barcode</label><input class='pure-input-1' id='update_prod_id_display' name='barcode'";
   edit_page += " type='number' placeholder='Barcode'><br><a style='float:right;' type='' id='update_prod_by_id_btn' onclick='updateProductByID()' class='pure-button' href='#'>Update This Product</a><a href='#' id='move_to_update_details_btn'></a></fieldset></div>";
   $("#divcontent").html(edit_page);
+  $("#pagetitle").html("Update Product");
+
 }
 
 
