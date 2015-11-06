@@ -42,13 +42,13 @@ if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']),'windows')>0) {
 if($mobile_browser>0){
     // do something
   //  echo "mobile";
-    header("location: phonegap/index.html");
+    header("location: admin/index.html");
     $output = "mobile";
 
 } else {
 // do something else
 //echo "non mobile";
-    header("location: desktop/threepageweb.xhtml");
+    header("location: admin-desktop/index.html");
     $output = "non mobile";
 }
 ?>
