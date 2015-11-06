@@ -5,19 +5,38 @@ $(window).load(function() {
   viewAllProducts();
 });
 
+function addProductToStock(){
+  alert();
+  // add product to database
+  addProduct();
+  $("#add_prod_id_display").val("");
+  $("#add_prod_name_display").val("");
+  $("#add_prod_price_display").val("");
+  $("#add_prod_quantity_display").val("");
+}
+
+
+// $("#add_to_stock_btn").on("click",function(){
+//   alert();
+//
+// });
+
+
 $(function(){
     $("#add_to_stock_btn").click(function(){
-      // add product to database
-      addProduct();
-      $("#add_prod_id_display").val("");
-      $("#add_prod_name_display").val("");
-      $("#add_prod_price_display").val("");
-      $("#add_prod_quantity_display").val("");
+      addProductToStock();
     });
 
+    $("#add_to_stock_menu").click(function(){
+      loadAddPage();
+    });
 
     $("#update_porduct_btn").click(function(){
       updateProduct();
+    });
+
+    $("#list_porducts_btn").click(function(){
+      viewAllProducts();
     });
 
     $("#update_prod_by_id_btn").click(function(){
@@ -107,7 +126,7 @@ function viewAllProducts(){
           product_list += "<td>";
           product_list += obj.product[i].product_quantity;
           product_list += "</td>";
-          product_list += "<td><a href='#updatedetailspage' onclick='getProductFromList("+id+")' class='ui-shadow ui-btn-right ui-corner-all ui-btn-inline ui-icon-edit ui-btn-icon-notext ui-btn-b ui-mini'>Edit</a></td>";
+          product_list += "<td><a href='#updatedetailspage' onclick='getProductFromList("+id+")' class='pure-button'>Edit</a></td>";
           product_list += "</tr>";
         }
         product_list += "</tbody></table>"
@@ -119,6 +138,13 @@ function viewAllProducts(){
       alert("error: couldn't fetch products");//err
   }
 }
+
+function loadAddPage(){
+  var add_page = "<div class='pure-form pure-form-stacked'><fieldset><legend>Please input the product details</legend><label for='name'>Name</label><input class='pure-input-1' id='add_prod_name_display' name='name' type='text' value='' placeholder='Name'><br><label for='barcode'>Barcode</label><input class='pure-input-1' id='add_prod_id_display' name='barcode' type='number' placeholder='Barcode'><br><label for='price'>Price</label><input class='pure-input-1' id='add_prod_price_display' name='price' type='number' placeholder='Price'><br><label for='quantity'>Quantity</label><input class='pure-input-1' id='add_prod_quantity_display' name='quantity' type='number' placeholder='Quantity'><br><a style='float:right;' type='' id='add_to_stock_btn' class='pure-button' href='#' onclick='addProductToStock()'><i class='fa fa-shopping-cart fa-lg'></i>Add to Stock</a></fieldset></div>";
+  $("#divcontent").html(add_page);
+}
+
+
 
 function addProduct(){
   var product_id = $("#add_prod_id_display").val();
