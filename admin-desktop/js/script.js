@@ -31,6 +31,10 @@ $(function(){
       loadAddPage();
     });
 
+    $("#update_prod_menu").click(function(){
+          loadEditPage();
+    });
+
     $("#update_porduct_btn").click(function(){
       updateProduct();
     });
@@ -57,7 +61,16 @@ function sendRequest(u){
 
 function updateProductByID() {
   var product_id = $("#update_prod_id_display").val();
-  $("#update_details_id_display").html(product_id);
+
+  var update_details;
+  update_details = "<div class='pure-form pure-form-stacked'><fieldset><legend>Please input the product details</legend><h4 id='update_details_name_display'></h4><h4 id='update_details_id_display'></h4>";
+  update_details += "<label for='name'>Price</label><input class='pure-input-1' id='update_details_price_display' name='price' type='number' value='' placeholder='Price'><br><label for='barcode'>Quantity</label>";
+  update_details += "<input class='pure-input-1' id='update_details_quantity_display' name='quantity' type='number' placeholder='Quantity'><br><a style='float:right;' type='' id='update_porduct_btn' onclick='updateProduct()' class='pure-button' href='#'>";
+  update_details += "<i class='fa fa-shopping-cart fa-lg'></i>Save Changes</a></fieldset></div>";
+
+  $("#divcontent").html(update_details);
+
+  $("#update_details_id_display").html("Barcode: "+product_id);
   getProduct(product_id);
   $("#update_prod_id_display").val("");
   // $("#update_details_id_display").prop('readonly', true);
@@ -77,7 +90,7 @@ function getProduct(code){
     var product_name = obj.product[0]['product_name'];
     var product_price = obj.product[0]['product_price'];
     var product_quantity = obj.product[0]['product_quantity'];
-    $("#update_details_name_display").html(product_name);
+    $("#update_details_name_display").html("Product: "+product_name);
     $("#update_details_quantity_display").val(product_quantity);
     $("#update_details_price_display").val(product_price);
     $("#move_to_update_details_btn").trigger("click");
@@ -88,6 +101,7 @@ function getProduct(code){
 }
 
 function updateProduct() {
+
   var product_id = $("#update_details_id_display").html();
   // var product_name = $("#add_prod_name_display").val();
   var product_price = $("#update_details_price_display").val();
@@ -114,7 +128,8 @@ function viewAllProducts(){
 
     var product_list;
     // if(obj.result==1){					//check result
-        product_list = "<table class='pure-table' width=100%><thead class='pure-table'><tr><th>Product</th><th>ID</th><th>Price</th><th>Quantity</th><th>Action</th></tr></thead><tbody id='product_list_ul' class='pure-table'>";
+        product_list = "<table class='pure-table' width=100%><thead class='pure-table'><tr><th>Product</th><th>ID</th><th>Price</th>";
+        product_list += "<th>Quantity</th><th>Action</th></tr></thead><tbody id='product_list_ul' class='pure-table'>";
         for (var i = 0; i < obj.product.length; i++) {
           var id = obj.product[i].product_id;
           // obj.product_name[i]
@@ -140,10 +155,22 @@ function viewAllProducts(){
 }
 
 function loadAddPage(){
-  var add_page = "<div class='pure-form pure-form-stacked'><fieldset><legend>Please input the product details</legend><label for='name'>Name</label><input class='pure-input-1' id='add_prod_name_display' name='name' type='text' value='' placeholder='Name'><br><label for='barcode'>Barcode</label><input class='pure-input-1' id='add_prod_id_display' name='barcode' type='number' placeholder='Barcode'><br><label for='price'>Price</label><input class='pure-input-1' id='add_prod_price_display' name='price' type='number' placeholder='Price'><br><label for='quantity'>Quantity</label><input class='pure-input-1' id='add_prod_quantity_display' name='quantity' type='number' placeholder='Quantity'><br><a style='float:right;' type='' id='add_to_stock_btn' class='pure-button' href='#' onclick='addProductToStock()'><i class='fa fa-shopping-cart fa-lg'></i>Add to Stock</a></fieldset></div>";
+  var add_page;
+  add_page = "<div class='pure-form pure-form-stacked'><fieldset><legend>Please input the product details</legend><label for='name'>Name</label>";
+  add_page += "<input class='pure-input-1' id='add_prod_name_display' name='name' type='text' value='' placeholder='Name'><br><label for='barcode'>Barcode</label>";
+  add_page += "<input class='pure-input-1' id='add_prod_id_display' name='barcode' type='number' placeholder='Barcode'><br><label for='price'>Price</label>";
+  add_page += "<input class='pure-input-1' id='add_prod_price_display' name='price' type='number' placeholder='Price'><br><label for='quantity'>Quantity</label>";
+  add_page += "<input class='pure-input-1' id='add_prod_quantity_display' name='quantity' type='number' placeholder='Quantity'><br>";
+  add_page += "<a style='float:right;' type='' id='add_to_stock_btn' class='pure-button' href='#' onclick='addProductToStock()'><i class='fa fa-shopping-cart fa-lg'></i>Add to Stock</a></fieldset></div>";
   $("#divcontent").html(add_page);
 }
 
+function loadEditPage() {
+  var edit_page;
+  edit_page = "<div class='pure-form pure-form-stacked'><fieldset><legend>Please input the product id</legend><label for='barcode'>Barcode</label><input class='pure-input-1' id='update_prod_id_display' name='barcode'";
+  edit_page += " type='number' placeholder='Barcode'><br><a style='float:right;' type='' id='update_prod_by_id_btn' onclick='updateProductByID()' class='pure-button' href='#'>Update This Product</a><a href='#' id='move_to_update_details_btn'></a></fieldset></div>";
+  $("#divcontent").html(edit_page);
+}
 
 
 function addProduct(){
