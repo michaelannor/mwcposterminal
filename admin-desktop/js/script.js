@@ -6,7 +6,6 @@ $(window).load(function() {
 });
 
 function addProductToStock(){
-  alert();
   // add product to database
   addProduct();
   $("#add_prod_id_display").val("");
@@ -78,7 +77,16 @@ function updateProductByID() {
 }
 
 function getProductFromList(product_id){
-  // alert(product_id);
+  alert(product_id);
+
+  var update_details;
+  update_details = "<div class='pure-form pure-form-stacked'><fieldset><legend>Please input the product details</legend><h4 id='update_details_name_display'></h4><h4 id='update_details_id_display'></h4>";
+  update_details += "<label for='name'>Price</label><input class='pure-input-1' id='update_details_price_display' name='price' type='number' value='' placeholder='Price'><br><label for='barcode'>Quantity</label>";
+  update_details += "<input class='pure-input-1' id='update_details_quantity_display' name='quantity' type='number' placeholder='Quantity'><br><a style='float:right;' type='' id='update_porduct_btn' onclick='updateProduct()' class='pure-button' href='#'>";
+  update_details += "<i class='fa fa-shopping-cart fa-lg'></i>Save Changes</a></fieldset></div>";
+
+  $("#divcontent").html(update_details);
+
   $("#update_details_id_display").html(product_id);
   getProduct(product_id);
 }
@@ -141,7 +149,7 @@ function viewAllProducts(){
           product_list += "<td>";
           product_list += obj.product[i].product_quantity;
           product_list += "</td>";
-          product_list += "<td><a href='#updatedetailspage' onclick='getProductFromList("+id+")' class='pure-button'>Edit</a></td>";
+          product_list += "<td><a href='#' onclick='getProductFromList("+id+")' class='pure-button'>Edit</a></td>";
           product_list += "</tr>";
         }
         product_list += "</tbody></table>"
